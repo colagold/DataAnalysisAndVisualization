@@ -1,5 +1,8 @@
 import pandas as pd
 from openpyxl import load_workbook
+import xlrd
+import csv
+import json
 
 '''
 pandas读取excel
@@ -53,6 +56,75 @@ def read_excel_by_openpyxl(path):
         for j in i:
             print(j.value)
 
+'''
+xlrd读取excel文件
+'''
+def read_excel_by_xlrd(path):
+    wb = xlrd.open_workbook(path)
+    # 获取并打印 sheet 数量
+    print("sheet 数量:", wb.nsheets)
+    # 获取并打印 sheet 名称
+    print("sheet 名称:", wb.sheet_names())
+    # 根据 sheet 索引获取内容
+    sh1 = wb.sheet_by_index(0)
+    # 也可根据 sheet 名称获取内容
+    # sh = wb.sheet_by_name('成绩')
+    # 获取并打印该 sheet 行数和列数
+    print(u"sheet %s 共 %d 行 %d 列" % (sh1.name, sh1.nrows, sh1.ncols))
+    # 获取并打印某个单元格的值
+    print("第一行第二列的值为:", sh1.cell_value(0, 1))
+    # 获取整行或整列的值
+    rows = sh1.row_values(0)  # 获取第一行内容
+    cols = sh1.col_values(1)  # 获取第二列内容
+    # 打印获取的行列值
+    print("第一行的值为:", rows)
+    print("第二列的值为:", cols)
+    # 获取单元格内容的数据类型
+    print("第二行第一列的值类型为:", sh1.cell(1, 0).ctype)
+
+'''
+open函数打开csv文件
+'''
+def read_csv_by_open(path):
+    csv_list=[]
+    with open(path) as f:
+        for line in f:
+            list_line=line.strip('\n').split(',')  # 去除逗号和换行符号，去除后格式为list
+            print(list_line)
+            csv_list.append(list_line)
+    print(csv_list)
+    return csv_list
+
+'''
+用pandas读取csv文件
+'''
+def read_csv_by_pandas(path):
+    # 返回的是一个DataFrame数据
+    df = pd.read_csv(path)
+    print(df)
+    print(df.describe())
+    return df
+'''
+csv库读取csv文件
+'''
+def read_csv_by_csv(path):
+    csv_list=[]
+    csv_reader = csv.reader(open(path))
+    for line in csv_reader:
+        print(line)
+        csv_list.append(line)
+    print(csv_list)
+    return csv_list
+'''
+json包读取json文件
+'''
+def read_json_by_json(path):
+    json_dict=json.load(open(path,encoding="utf-8"))
+    print(json_dict)
+    print(json_dict["employee"])
+    return json_dict
+
+
 def read_txt_all(path):
     with open(path,"r",encoding="utf-8") as file:
         data=file.read() #读取所有
@@ -70,7 +142,12 @@ def read_txt_to_list(path):
 if __name__=="__main__":
     path="../data/read_file_test/"
     file_name="number_test.txt"
-    read_txt_to_list(path+file_name)
+    # read_txt_to_list(path+file_name)
     excel_name="test_excel.xlsx"
-    read_excel_by_pandas(path+excel_name)
-    read_excel_by_openpyxl(path+excel_name)
+    #read_excel_by_xlrd(path+excel_name)
+    csv_name="test_csv.csv"
+    #read_csv_by_open(path+csv_name)
+    #read_csv_by_pandas(path+csv_name)
+    #read_csv_by_csv(path+csv_name)
+    json_name="test_json.json"
+    read_json_by_json(path+json_name)
