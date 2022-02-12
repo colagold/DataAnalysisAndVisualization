@@ -133,16 +133,18 @@ def read_txt_all(path):
 
 def read_txt_to_list(path):
     res_list=[]
-    with open(path, "r") as file:
+    with open(path, "r",encoding="utf-8") as file:
         for line in file.readlines():
-            line.strip("\n").split('\t')  # 去掉列表中每一个元素的换行符
+            line=line.strip("\n").split('   ')  # 去掉列表中每一个元素的换行符
             print(line)
+            res_list.append(line)
+    return res_list
 
 
 if __name__=="__main__":
     path="../data/read_file_test/"
     file_name="number_test.txt"
-    # read_txt_to_list(path+file_name)
+    read_txt_to_list(path+file_name)
     excel_name="test_excel.xlsx"
     #read_excel_by_xlrd(path+excel_name)
     csv_name="test_csv.csv"
@@ -150,4 +152,4 @@ if __name__=="__main__":
     #read_csv_by_pandas(path+csv_name)
     #read_csv_by_csv(path+csv_name)
     json_name="test_json.json"
-    read_json_by_json(path+json_name)
+    #read_json_by_json(path+json_name)
