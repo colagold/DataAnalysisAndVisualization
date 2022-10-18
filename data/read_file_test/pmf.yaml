@@ -1,0 +1,24 @@
+#YAML读取与转换示例
+algorithm: algorithm.pmf.PMF
+protocol: protocol_tvt.TVT
+data_dir: data/small_data
+metrics: ['metrics.MAE', 'metrics.RMSE']
+scenario: scenario.ScenarioRec
+log_path: result/pmf.result
+
+algorithm_parameters:
+  d: 50
+  lr: 0.001
+  n_itr: 10
+  tensorboard_path: log_tensorboard\pmf
+  testmodel:
+    algorithm.pmf.PMF:
+      d: 1000
+  encoder:
+    algorithm.pmf.TestLoss:
+      layers: 3
+      lr: 0.01
+      loss:
+        algorithm.pmf.TestLoss:
+          layers: 100
+          lr: 0.001

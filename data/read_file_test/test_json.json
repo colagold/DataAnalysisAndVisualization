@@ -10,5 +10,13 @@
          "name": "sunil",
          "department": "HR"
       }
-   ]
+   ],
+   "boss":
+   {
+      "id": "001",
+      "employee":
+      {
+         "id": "000001"
+      }
+   }
 }
