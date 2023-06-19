@@ -146,7 +146,7 @@ if __name__=="__main__":
     file_name="number_test.txt"
     read_txt_to_list(path+file_name)
     excel_name="test_excel.xlsx"
-    #read_excel_by_xlrd(path+excel_name)
+    read_excel_by_xlrd(path+excel_name)
     csv_name="test_csv.csv"
     #read_csv_by_open(path+csv_name)
     #read_csv_by_pandas(path+csv_name)
