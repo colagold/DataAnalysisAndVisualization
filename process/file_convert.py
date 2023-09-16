@@ -6,8 +6,8 @@ import os
     总结pandas中利用DataFrame进行文件转换
 '''
 def file_convert(path):
-    #df= pd.read_table(path, header=None, delimiter='\\s',engine='python',encoding='utf-8')
-    df=pd.read_csv(path,header=None)
+    df= pd.read_table(path, header=None, delimiter='\\s',engine='python',encoding='utf-8')
+    #df=pd.read_csv(path,header=None)
     df.to_csv("ratings.csv",header=False,index=False) # 只保存数据主体，不保存索引列合头
 
     uids = df.iloc[:, 0].values
@@ -16,4 +16,4 @@ def file_convert(path):
     ds = sp.csr_matrix((rates, (uids, iids))
                        , dtype=np.float32)
 
-file_convert("../output/txt/Coat.txt")
+file_convert("E:\Resourse\研究生\模型\OpinionGCN\数据集\\netflix\\netflix.inter")
